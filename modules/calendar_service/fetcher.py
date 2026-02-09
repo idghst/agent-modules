@@ -5,11 +5,14 @@ Google Calendar API 서비스 모듈
 """
 
 import datetime
+import logging
 from typing import List, Dict
 
 from googleapiclient.errors import HttpError
 
-from agent_modules.auth_service import get_calendar_service
+from modules.auth_service import get_calendar_service
+
+logger = logging.getLogger(__name__)
 
 
 class CalendarFetcher:
@@ -68,7 +71,7 @@ class CalendarFetcher:
                     all_events.append(event)
 
             except HttpError as e:
-                print(f"⚠️ 캘린더 '{calendar_summary}' 조회 실패: {e}")
+                logger.warning(f"⚠️ 캘린더 '{calendar_summary}' 조회 실패: {e}")
 
         # 시작 시간 기준 정렬
         all_events.sort(

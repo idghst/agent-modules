@@ -16,11 +16,18 @@ def get_project_root() -> Path:
     """
     프로젝트 루트 디렉토리를 반환합니다.
 
+    우선순위:
+    1. 환경변수 PROJECT_ROOT
+    2. 현재 작업 디렉토리 (os.getcwd())
+
     Returns:
         프로젝트 루트 경로
     """
-    # agent_modules/utils/common.py -> agent_modules/utils -> agent_modules -> project_root
-    return Path(__file__).parent.parent.parent
+    env_root = os.getenv("PROJECT_ROOT")
+    if env_root:
+        return Path(env_root)
+
+    return Path.cwd()
 
 
 def load_env(env_file: Optional[str] = None) -> None:

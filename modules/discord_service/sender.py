@@ -6,7 +6,10 @@ Discord Webhook을 사용하여 알림을 전송합니다.
 
 import os
 import requests
+import logging
 from typing import Optional
+
+logger = logging.getLogger(__name__)
 
 
 class DiscordSender:
@@ -44,5 +47,5 @@ class DiscordSender:
             response.raise_for_status()
             return True
         except requests.exceptions.RequestException as e:
-            print(f"⚠️ Discord 메시지 전송 실패: {e}")
+            logger.error(f"⚠️ Discord 메시지 전송 실패: {e}")
             return False

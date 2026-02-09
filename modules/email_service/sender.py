@@ -10,7 +10,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from typing import Optional, List
 
-from agent_modules.auth_service import get_gmail_service
+from modules.auth_service import get_gmail_service
 
 
 class EmailSender:
